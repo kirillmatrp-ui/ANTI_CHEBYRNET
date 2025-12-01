@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пентагон 2.0 | Будущее обороны</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --pentagon-blue: #00308F;
+            --pentagon-red: #B31942;
+            --pentagon-gold: #FFD700;
+            --dark-bg: #0a0a1a;
+            --light-bg: #f5f5f5;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--pentagon-blue) 0%, #001a4d 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--pentagon-red);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, white, var(--pentagon-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-text span {
+            color: var(--pentagon-gold);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--pentagon-gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), 
+                        url('https://images.unsplash.com/photo-1530475701095-ebfefb3e59d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, white, var(--pentagon-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #ccc;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--pentagon-blue), var(--pentagon-red));
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(179, 25, 66, 0.3);
+        }
+
+        /* Pentagon Stats */
+        .pentagon-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            min-width: 200px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--pentagon-gold);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-top: 10px;
+        }
+
+        /* Sections */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 3rem 0;
+            color: white;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--pentagon-blue), var(--pentagon-red));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--pentagon-blue);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: var(--pentagon-red);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--pentagon-gold);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        /* Interactive Pentagon */
+        .pentagon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 4rem 0;
+            min-height: 500px;
+        }
+
+        .pentagon-shape {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--pentagon-blue), var(--pentagon-red));
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .pentagon-shape:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 48, 143, 0.7);
+        }
+
+        .pentagon-inner {
+            width: 80%;
+            height: 80%;
+            background-color: rgba(0, 0, 0, 0.7);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pentagon-text {
+            font-size: 1.2rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, #001a4d, #000814);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--pentagon-gold);
+        }
+
+        .footer-section p {
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--pentagon-red);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            background: linear-gradient(135deg, #B31942, #8B0000);
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            text-align: center;
+            animation: pulseWarning 2s infinite;
+            border: 2px solid var(--pentagon-gold);
+        }
+
+        .disclaimer h4 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .disclaimer p {
+            color: #FFD700;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        @keyframes pulseWarning {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .pentagon-stats {
+                gap: 20px;
+            }
+            
+            .stat-item {
+                min-width: 170px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--pentagon-blue);
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .pentagon-shape {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .disclaimer h4 {
+                font-size: 1.3rem;
+            }
+            
+            .disclaimer p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .pentagon-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-item {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .disclaimer {
+                padding: 15px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+        
+        /* Krasnoyarsk specific */
+        .krasnoyarsk-info {
+            background: rgba(0, 48, 143, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #B31942;
+        }
+        
+        .krasnoyarsk-info i {
+            color: var(--pentagon-gold);
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">P</div>
+                <div class="logo-text">ПЕНТАГОН <span>2.0</span></div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="mainMenu">
+                    <li><a href="#home"><i class="fas fa-home"></i> Главная</a></li>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> О проекте</a></li>
+                    <li><a href="#features"><i class="fas fa-star"></i> Возможности</a></li>
+                    <li><a href="#technology"><i class="fas fa-microchip"></i> Технологии</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1 class="animate-fadeIn">Пентагон 2.0</h1>
+            <p class="animate-fadeIn">Цифровая трансформация оборонительных систем. Будущее безопасности начинается сегодня.</p>
+            <p class="animate-fadeIn">Интегрированные системы искусственного интеллекта, киберзащита нового поколения и стратегическое планирование на основе больших данных.</p>
+            <a href="#about" class="cta-button animate-fadeIn">Исследовать проект</a>
+            
+            <div class="krasnoyarsk-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <strong>Новое расположение:</strong> г. Красноярск, Сибирский федеральный округ
+            </div>
+            
+            <div class="pentagon-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="stat1">0</span>
+                    <span class="stat-label">Стратегических систем</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="stat2">0</span>
+                    <span class="stat-label">Киберопераций в день</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="stat3">0</span>
+                    <span class="stat-label">Экспертов AI</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="container" id="about">
+        <h2 class="section-title">О проекте Пентагон 2.0</h2>
+        
+        <div class="krasnoyarsk-info">
+            <i class="fas fa-city"></i>
+            <strong>Красноярский филиал:</strong> Новый высокотехнологичный комплекс в географическом центре России обеспечивает максимальную защищенность от внешних угроз.
+        </div>
+        
+        <div class="features">
+            <div class="feature-card hidden">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Искусственный интеллект</h3>
+                <p>Продвинутые алгоритмы машинного обучения для анализа угроз и прогнозирования сценариев безопасности.</p>
+            </div>
+            <div class="feature-card hidden">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Кибербезопасность</h3>
+                <p>Многоуровневая защита от кибератак с использованием квантового шифрования и блокчейн-технологий.</p>
+            </div>
+            <div class="feature-card hidden">
+                <div class="feature-icon">
+                    <i class="fas fa-satellite"></i>
+                </div>
+                <h3>Космические технологии</h3>
+                <p>Мониторинг и защита орбитального пространства с помощью новейших спутниковых систем.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Pentagon -->
+    <section id="technology">
+        <h2 class="section-title">Интерактивный Пентагон</h2>
+        
+        <div class="krasnoyarsk-info" style="max-width: 800px; margin: 0 auto 30px;">
+            <i class="fas fa-mountain"></i>
+            <strong>Сибирское преимущество:</strong> Благодаря расположению в Красноярске, система защищена естественными географическими барьерами и имеет прямой доступ к космодрому.
+        </div>
+        
+        <div class="pentagon-container">
+            <div class="pentagon-shape" id="interactivePentagon">
+                <div class="pentagon-inner">
+                    <div class="pentagon-text">
+                        <i class="fas fa-lock" style="font-size: 3rem; margin-bottom: 15px; color: var(--pentagon-gold);"></i>
+                        <div>Активируйте защитные системы</div>
+                        <small>Нажмите на пентагон</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container" id="features">
+        <h2 class="section-title">Ключевые возможности</h2>
+        <div class="features">
+            <div class="feature-card hidden">
+                <div class="feature-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h3>Глобальный мониторинг</h3>
+                <p>Круглосуточное наблюдение за угрозами по всему миру с помощью сетей датчиков и спутников.</p>
+            </div>
+            <div class="feature-card hidden">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Автономные системы</h3>
+                <p>Роботизированные платформы для разведки и защиты критически важной инфраструктуры.</p>
+            </div>
+            <div class="feature-card hidden">
+                <div class="feature-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Большие данные</h3>
+                <p>Обработка эксабайтов информации в реальном времени для принятия стратегических решений.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Пентагон 2.0</h3>
+                    <p>Цифровая трансформация оборонительных систем. Инновационные технологии для безопасности будущего.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Красноярск, ул. Защитная, д. 2.0</p>
+                    <p><i class="fas fa-envelope"></i> krasnoyarsk@pentagon2.0.ru</p>
+                    <p><i class="fas fa-phone"></i> +7 (000) 000-00-00</p>
+                    <p><i class="fas fa-fax"></i> +7 (000) 000-00-01</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <p><a href="#home" style="color: #aaa; text-decoration: none;">Главная</a></p>
+                    <p><a href="#about" style="color: #aaa; text-decoration: none;">О проекте</a></p>
+                    <p><a href="#technology" style="color: #aaa; text-decoration: none;">Технологии</a></p>
+                    <p><a href="#contact" style="color: #aaa; text-decoration: none;">Контакты</a></p>
+                </div>
+            </div>
+            
+            <!-- Важное предупреждение -->
+            <div class="disclaimer">
+                <h4><i class="fas fa-exclamation-triangle"></i> ВАЖНОЕ УВЕДОМЛЕНИЕ</h4>
+                <p>Данный сайт является ШУТКОЙ и создан исключительно в развлекательных целях!</p>
+                <p>Пентагон 2.0 в Красноярске не существует. Все контактные данные вымышлены.</p>
+                <p><i class="fas fa-smile-wink"></i> Наслаждайтесь юмором и не воспринимайте информацию всерьез!</p>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Пентагон 2.0 (Шуточный проект). Все права не защищены. | Это демонстрационный сайт-шутка</p>
+                <p style="margin-top: 10px; color: #aaa; font-size: 0.8rem;">
+                    <i class="fas fa-laugh-beam"></i> Создано для поднятия настроения, а не для шпионажа
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainMenu = document.getElementById('mainMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Animate stats counter
+        function animateCounter(elementId, finalValue, duration = 2000) {
+            let element = document.getElementById(elementId);
+            let startValue = 0;
+            let increment = finalValue / (duration / 16); // 60fps
+            let current = 0;
+            
+            function updateCounter() {
+                current += increment;
+                if (current < finalValue) {
+                    element.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = finalValue;
+                }
+            }
+            
+            updateCounter();
+        }
+
+        // Initialize stats after page load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                animateCounter('stat1', 147);
+                animateCounter('stat2', 850);
+                animateCounter('stat3', 256);
+            }, 1000);
+            
+            // Добавляем шутливый контактный номер при наведении
+            const phoneElement = document.querySelector('.fa-phone').parentElement;
+            phoneElement.addEventListener('mouseover', function() {
+                this.innerHTML = '<i class="fas fa-phone"></i> +7 (391) 123-45-67';
+            });
+            
+            phoneElement.addEventListener('mouseout', function() {
+                this.innerHTML = '<i class="fas fa-phone"></i> +7 (000) 000-00-00';
+            });
+            
+            // Шутка с факсом
+            const faxElement = document.querySelector('.fa-fax').parentElement;
+            faxElement.addEventListener('mouseover', function() {
+                this.innerHTML = '<i class="fas fa-fax"></i> +7 (391) 765-43-21';
+            });
+            
+            faxElement.addEventListener('mouseout', function() {
+                this.innerHTML = '<i class="fas fa-fax"></i> +7 (000) 000-00-01';
+            });
+        });
+
+        // Interactive Pentagon
+        const interactivePentagon = document.getElementById('interactivePentagon');
+        let pentagonActive = false;
+        
+        interactivePentagon.addEventListener('click', () => {
+            pentagonActive = !pentagonActive;
+            
+            if (pentagonActive) {
+                interactivePentagon.style.background = 'linear-gradient(135deg, #B31942, #FF4500)';
+                interactivePentagon.style.boxShadow = '0 0 60px rgba(179, 25, 66, 0.9)';
+                interactivePentagon.querySelector('.pentagon-text').innerHTML = `
+                    <i class="fas fa-check-circle" style="font-size: 3rem; margin-bottom: 15px; color: #00FF00;"></i>
+                    <div>Защитные системы активированы</div>
+                    <small>Уровень угрозы: НИЗКИЙ</small>
+                    <div style="font-size: 0.8rem; margin-top: 10px; color: #FFD700;">
+                        <i class="fas fa-snowflake"></i> Красноярск защищён!
+                    </div>
+                `;
+                
+                // Add a pulse animation
+                interactivePentagon.style.animation = 'pulse 1.5s infinite';
+                
+                // Create a style for pulse animation
+                if (!document.querySelector('#pulse-style')) {
+                    const style = document.createElement('style');
+                    style.id = 'pulse-style';
+                    style.textContent = `
+                        @keyframes pulse {
+                            0% { box-shadow: 0 0 0 0 rgba(179, 25, 66, 0.7); }
+                            70% { boxShadow: 0 0 0 20px rgba(179, 25, 66, 0); }
+                            100% { boxShadow: 0 0 0 0 rgba(179, 25, 66, 0); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+                
+                // Шутливый звук (виртуальный)
+                console.log("🔊 Виртуальный звук: 'Системы защиты Красноярска активированы!'");
+            } else {
+                interactivePentagon.style.background = 'linear-gradient(135deg, var(--pentagon-blue), var(--pentagon-red))';
+                interactivePentagon.style.boxShadow = 'none';
+                interactivePentagon.style.animation = 'none';
+                interactivePentagon.querySelector('.pentagon-text').innerHTML = `
+                    <i class="fas fa-lock" style="font-size: 3rem; margin-bottom: 15px; color: var(--pentagon-gold);"></i>
+                    <div>Активируйте защитные системы</div>
+                    <small>Нажмите на пентагон</small>
+                    <div style="font-size: 0.8rem; margin-top: 10px; color: #aaa;">
+                        <i class="fas fa-temperature-low"></i> Работает при любой температуре!
+                    </div>
+                `;
+            }
+        });
+
+        // Scroll animations for feature cards
+        function checkVisibility() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            featureCards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const isVisible = rect.top <= window.innerHeight * 0.8;
+                
+                if (isVisible) {
+                    card.classList.remove('hidden');
+                    card.classList.add('animate-fadeIn');
+                }
+            });
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', checkVisibility);
+        
+        // Check visibility on page load
+        document.addEventListener('DOMContentLoaded', checkVisibility);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    mainMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Шутливый эффект при наведении на disclaimer
+        const disclaimer = document.querySelector('.disclaimer');
+        disclaimer.addEventListener('click', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.transition = 'transform 0.3s';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 300);
+            
+            // Случайные шутливые сообщения
+            const jokes = [
+                "Серьёзно, это шутка! 😄",
+                "Вы же не думали, что это правда? 🤔",
+                "Красноярский Пентагон - звучит круто! 🏔️",
+                "Шпионы, расслабьтесь, тут нечего шпионить! 🕵️‍♂️",
+                "Даже AI знает, что это шутка! 🤖"
+            ];
+            
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            console.log(`💡 ${randomJoke}`);
+        });
+    </script>
+</body>
+</html>
